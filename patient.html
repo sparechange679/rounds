@@ -1,0 +1,473 @@
+<!doctype html>
+<html lang="en" data-bs-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Marisol Ventura, Bed 3A-07 — Rounds Hospital Management System</title>
+  <meta name="description" content="Patient record with demographics, allergy banner, 72-hour vitals trend, medications, flagged lab results and a clinical notes timeline.">
+  <meta name="theme-color" content="#0b2a4a">
+  <script>document.documentElement.classList.add('js');try{var t=localStorage.getItem('rounds-theme');if(!t&&window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches)t='dark';if(t)document.documentElement.setAttribute('data-bs-theme',t);if(localStorage.getItem('rounds-sidebar')==='collapsed')document.documentElement.classList.add('sidebar-collapsed');}catch(e){}</script>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%235ee0c1'/%3E%3Ccircle cx='16' cy='16' r='9' fill='none' stroke='%230b2a4a' stroke-width='2.6' stroke-linecap='round' stroke-dasharray='46 11' transform='rotate(-58 16 16)'/%3E%3Cpath d='M16 12.2v7.6M12.2 16h7.6' stroke='%230b2a4a' stroke-width='2.6' stroke-linecap='round'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&amp;family=IBM+Plex+Sans:wght@400;500;600;700&amp;display=swap">
+  <link rel="stylesheet" href="css/vendor/bootstrap.min.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="page-patient">
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <div class="app">
+  <aside class="sidebar offcanvas-lg offcanvas-start" id="sidebar" tabindex="-1" aria-labelledby="sidebar-title">
+    <div class="sidebar-inner">
+      <div class="sidebar-head">
+        <a class="brand" href="index.html"><svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#5ee0c1"/><circle cx="16" cy="16" r="9" fill="none" stroke="#0b2a4a" stroke-width="2.6" stroke-linecap="round" stroke-dasharray="46 11" transform="rotate(-58 16 16)"/><path d="M16 12.2v7.6M12.2 16h7.6" stroke="#0b2a4a" stroke-width="2.6" stroke-linecap="round"/></svg><span class="brand-text"><span class="brand-name" id="sidebar-title">Rounds</span><span class="brand-org">St. Aldric General</span></span></a>
+        <button type="button" class="icon-btn icon-btn--dark d-lg-none" data-bs-dismiss="offcanvas" data-bs-target="#sidebar" aria-label="Close navigation"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+      </div>
+      <nav class="sidebar-nav" aria-label="Primary">
+        <p class="nav-label">Clinical</p>
+        <ul class="side-list">
+          <li><a class="side-link" href="index.html" title="Overview"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3" y="3" width="7" height="9" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="14" y="12" width="7" height="9" rx="1"/><rect x="3" y="16" width="7" height="5" rx="1"/></svg><span class="side-label">Overview</span></a></li>
+          <li><a class="side-link" href="patients.html" title="Inpatients"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg><span class="side-label">Inpatients</span><span class="side-count">286</span></a></li>
+          <li><a class="side-link is-active" href="patient.html" aria-current="page" title="Patient record"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="8" y="2" width="8" height="4" rx="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="M12 11h4M12 16h4M8 11h.01M8 16h.01"/></svg><span class="side-label">Patient record</span></a></li>
+          <li><a class="side-link" href="appointments.html" title="OPD appointments"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg><span class="side-label">OPD appointments</span><span class="side-count">64</span></a></li>
+        </ul>
+        <p class="nav-label">Operations</p>
+        <ul class="side-list">
+          <li><a class="side-link" href="beds.html" title="Beds & wards"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M2 4v16"/><path d="M2 8h18a2 2 0 0 1 2 2v10"/><path d="M2 17h20"/><path d="M6 8v9"/></svg><span class="side-label">Beds &amp; wards</span><span class="side-count">36 free</span></a></li>
+          <li><a class="side-link" href="staff.html" title="Staff roster"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 3H4a2 2 0 0 0-2 2v4a6 6 0 0 0 12 0V5a2 2 0 0 0-2-2h-1"/><path d="M8 15v1a6 6 0 0 0 12 0v-3"/><circle cx="20" cy="11" r="2"/></svg><span class="side-label">Staff roster</span></a></li>
+        </ul>
+      </nav>
+      <div class="sidebar-foot">
+        <div class="shift-card">
+          <span class="av av--sky" aria-hidden="true">AO</span>
+          <div class="shift-card-body">
+            <strong>Dr. Adaeze Okafor</strong>
+            <span>Day shift &middot; 07:00&ndash;19:00</span>
+            <span class="shift-meter" role="img" aria-label="Shift 23 percent complete"><span style="width:23%"></span></span>
+          </div>
+        </div>
+        <a class="side-link side-link--quiet" href="login.html" title="Sign out"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="m16 17 5-5-5-5M21 12H9"/></svg><span class="side-label">Sign out</span></a>
+      </div>
+    </div>
+  </aside>
+  <div class="app-main">
+    <header class="topbar">
+      <button class="icon-btn d-lg-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebar" aria-controls="sidebar" aria-label="Open navigation"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+      <button class="icon-btn d-none d-lg-inline-flex" type="button" id="sidebar-collapse" aria-label="Collapse sidebar" aria-expanded="true"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 3v18"/><path d="m16 15-3-3 3-3"/></svg></button>
+      <form class="topbar-search" role="search" action="patients.html" method="get">
+        <label class="visually-hidden" for="global-search">Search patients by name, MRN or bed</label>
+        <svg class="ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+        <input id="global-search" name="q" type="search" placeholder="Search name, MRN or bed" autocomplete="off">
+        <kbd class="kbd" aria-hidden="true">/</kbd>
+      </form>
+      <div class="topbar-actions">
+        <span class="topbar-site d-none d-xl-inline-flex"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="4" y="2" width="16" height="20" rx="1"/><path d="M9 22v-4h6v4M8 6h.01M16 6h.01M12 6h.01M12 10h.01M12 14h.01M16 10h.01M16 14h.01M8 10h.01M8 14h.01"/></svg> Main campus</span>
+        <button class="icon-btn" type="button" id="theme-toggle" aria-label="Switch to dark theme"><svg class="ic ic-moon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg><svg class="ic ic-sun" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg></button>
+        <div class="dropdown">
+          <button class="icon-btn" type="button" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false" aria-label="Notifications, 4 unread" id="notif-btn"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg><span class="notif-badge" id="notif-count">4</span></button>
+          <div class="dropdown-menu dropdown-menu-end notif-menu">
+            <div class="notif-head"><strong>Notifications</strong><button type="button" class="link-btn" id="notif-read">Mark all read</button></div>
+            <ul class="notif-list"><li><a class="notif-item is-unread" href="patients.html"><span class="notif-icon notif-icon--coral"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9v4M12 17h.01"/></svg></span><span class="notif-text"><strong>Critical potassium 6.3 mmol/L</strong><span>4B-22 &middot; K. Asante</span></span><time class="notif-time">4 min ago</time></a></li><li><a class="notif-item is-unread" href="beds.html"><span class="notif-icon notif-icon--amber"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span><span class="notif-text"><strong>ED boarding over 4 hours</strong><span>2 patients awaiting medical beds</span></span><time class="notif-time">12 min ago</time></a></li><li><a class="notif-item is-unread" href="staff.html"><span class="notif-icon notif-icon--amber"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span><span class="notif-text"><strong>4B night shift is 1 RN short</strong><span>Open shift offered to bank staff</span></span><time class="notif-time">26 min ago</time></a></li><li><a class="notif-item is-unread" href="patient.html"><span class="notif-icon notif-icon--teal"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></span><span class="notif-text"><strong>Echo confirmed for M. Ventura</strong><span>Fri 25 Sep, 10:30 &middot; Cardiac Investigations</span></span><time class="notif-time">1 h ago</time></a></li></ul>
+          </div>
+        </div>
+        <div class="dropdown">
+          <button class="user-btn" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Account menu for Dr. Adaeze Okafor"><span class="av av--sky" aria-hidden="true">AO</span><span class="user-meta"><strong>Dr. A. Okafor</strong><small>Cardiology</small></span><svg class="ic ic-sm" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6"/></svg></button>
+          <ul class="dropdown-menu dropdown-menu-end user-menu">
+            <li class="user-menu-head"><strong>Dr. Adaeze Okafor</strong><span>Consultant cardiologist &middot; Bleep 4471</span></li>
+            <li><a class="dropdown-item" href="staff.html"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg> My shifts</a></li>
+            <li><a class="dropdown-item" href="patients.html"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg> My patients</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="login.html"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="m16 17 5-5-5-5M21 12H9"/></svg> Sign out</a></li>
+          </ul>
+        </div>
+      </div>
+    </header>
+    <div class="census" role="region" aria-label="Hospital census at 09:42">
+      <ul class="census-list"><li class=""><span class="census-k">Census</span><span class="census-v">286<span class="census-of">/340</span></span></li><li class=""><span class="census-k">Occupancy</span><span class="census-v">84.1%</span></li><li class=""><span class="census-k">Beds ready</span><span class="census-v" data-census="free">36</span></li><li class="is-alert"><span class="census-k">ED wait</span><span class="census-v">42 min</span></li><li class=""><span class="census-k">ED queue</span><span class="census-v">27</span></li><li class="is-warn"><span class="census-k">Awaiting bed</span><span class="census-v">6</span></li><li class=""><span class="census-k">Theatres</span><span class="census-v">7<span class="census-of">/9</span></span></li><li class=""><span class="census-k">Admits</span><span class="census-v">31</span></li><li class=""><span class="census-k">Discharges</span><span class="census-v">9<span class="census-of">/38</span></span></li></ul>
+      <span class="census-stamp"><span class="live-dot" aria-hidden="true"></span>Updated 09:42</span>
+    </div>
+    <main id="main" class="content" tabindex="-1">
+      <div class="page-head page-head--record">
+        <nav aria-label="Breadcrumb"><ol class="crumbs"><li><a href="index.html">St. Aldric General</a></li><li><a href="patients.html">Inpatients</a></li><li aria-current="page">Ward 3A &middot; Bed 07</li></ol></nav>
+        <div class="page-actions">
+          <button type="button" class="btn btn-outline" id="print-btn"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 9V2h12v7"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg> Print</button>
+          <a class="btn btn-outline" href="beds.html"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M16 3l4 4-4 4M20 7H4M8 21l-4-4 4-4M4 17h16"/></svg> Transfer</a>
+          <a class="btn btn-primary" href="#discharge"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"/></svg> Discharge plan</a>
+        </div>
+      </div>
+      <section class="wristband" aria-labelledby="pt-name">
+        <div class="wb-who">
+          <span class="av av--navy av--xl" aria-hidden="true">MV</span>
+          <div>
+            <h1 class="wb-name" id="pt-name">Marisol Ventura</h1>
+            <p class="wb-line"><span>Female, 67</span><span>DOB <span class="mono">14 Mar 1959</span></span><span>Blood group <strong>A+</strong></span><span>71.4 kg &middot; 162 cm</span></p>
+            <p class="wb-tags"><span class="chip chip--observation">Observation</span><span class="tag">Full code</span><span class="tag tag--amber">Falls risk: medium</span><span class="tag">Speaks English, Spanish</span></p>
+          </div>
+        </div>
+        <dl class="wb-facts">
+          <div><dt>Location</dt><dd>Ward 3A &middot; Bed <span class="mono">07</span></dd></div>
+          <div><dt>Attending</dt><dd>Dr. A. Okafor</dd></div>
+          <div><dt>Admitted</dt><dd><span class="mono">19 Sep 14:25</span> via ED</dd></div>
+          <div><dt>Length of stay</dt><dd>Day 6 &middot; EDD <span class="mono">26 Sep</span></dd></div>
+          <div><dt>Next of kin</dt><dd>Daniel Ventura (son) <span class="mono">555-0142</span></dd></div>
+          <div><dt>GP</dt><dd>Dr. E. Harrow, Northgate Practice</dd></div>
+        </dl>
+        <div class="wb-stub" aria-label="Medical record number SAG-204817">
+          <span class="barcode" aria-hidden="true"></span>
+          <span class="wb-mrn mono">SAG-204817</span>
+          <span class="wb-stub-label">MRN</span>
+        </div>
+      </section>
+      <section class="allergy-banner" aria-labelledby="allergy-title">
+        <h2 class="allergy-title" id="allergy-title"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9v4M12 17h.01"/></svg> Allergies <span class="count-badge count-badge--coral">3</span></h2>
+        <ul class="allergy-list">
+          <li class="is-severe"><strong>Penicillin</strong><span>Anaphylaxis &middot; severe</span></li>
+          <li><strong>Sulfonamide antibiotics</strong><span>Widespread rash &middot; moderate</span></li>
+          <li><strong>Latex</strong><span>Contact dermatitis &middot; mild</span></li>
+        </ul>
+        <p class="allergy-note">Verified by pharmacy 19 Sep</p>
+      </section>
+      <nav class="record-nav" aria-label="Record sections">
+        <a href="#vitals"><svg class="ic ic-sm" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg> Vitals</a><a href="#meds"><svg class="ic ic-sm" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m10.5 20.5 10-10a4.95 4.95 0 1 0-7-7l-10 10a4.95 4.95 0 1 0 7 7Z"/><path d="m8.5 8.5 7 7"/></svg> Medications</a><a href="#labs"><svg class="ic ic-sm" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9 3h6M10 3v6.5L4.5 19a1.5 1.5 0 0 0 1.3 2h12.4a1.5 1.5 0 0 0 1.3-2L14 9.5V3"/><path d="M7 15h10"/></svg> Lab results</a><a href="#notes"><svg class="ic ic-sm" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></svg> Clinical notes</a><a href="#discharge"><svg class="ic ic-sm" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"/></svg> Discharge</a>
+      </nav>
+      <div class="row g-3 mb-3">
+        <div class="col-xl-8">
+          <section class="panel monitor h-100" id="vitals" data-bs-theme="dark" aria-labelledby="vitals-title">
+            <header class="panel-head">
+              <div>
+                <h2 class="panel-title" id="vitals-title">Vitals trend &middot; last 72 hours</h2>
+                <p class="panel-sub">4-hourly observations. The band shows the normal range for the selected sign.</p>
+              </div>
+              <div class="news-score" title="National Early Warning Score 2"><span>NEWS2</span><strong>3</strong><em>Low&ndash;medium</em></div>
+            </header>
+            <div class="panel-body">
+              <div class="vitals-row"><div class="vital vital--hr "><span class="vital-label">Heart rate</span><span class="vital-value">88</span><span class="vital-range"><span class="vital-unit">bpm</span> 51&ndash;90</span></div><div class="vital vital--bp "><span class="vital-label">Blood pressure</span><span class="vital-value">124/74</span><span class="vital-range"><span class="vital-unit">mmHg</span> sys 111&ndash;219</span></div><div class="vital vital--spo2 is-flag"><span class="vital-label">SpO&#8322;</span><span class="vital-value">94</span><span class="vital-range"><span class="vital-unit">%</span> &ge; 96</span></div><div class="vital vital--rr is-flag"><span class="vital-label">Resp rate</span><span class="vital-value">21</span><span class="vital-range"><span class="vital-unit">/min</span> 12&ndash;20</span></div><div class="vital vital--temp "><span class="vital-label">Temp</span><span class="vital-value">37.3</span><span class="vital-range"><span class="vital-unit">&deg;C</span> 36.1&ndash;38.0</span></div></div>
+              <div class="seg seg--monitor js-only" role="group" aria-label="Vital sign shown in chart">
+                <button type="button" class="seg-btn" data-metric="hr" aria-pressed="true">Heart rate</button>
+                <button type="button" class="seg-btn" data-metric="bp" aria-pressed="false">Blood pressure</button>
+                <button type="button" class="seg-btn" data-metric="spo2" aria-pressed="false">SpO&#8322;</button>
+                <button type="button" class="seg-btn" data-metric="rr" aria-pressed="false">Resp. rate</button>
+                <button type="button" class="seg-btn" data-metric="temp" aria-pressed="false">Temp</button>
+              </div>
+              <figure class="chart chart--monitor" id="vitals-chart" aria-label="Vital signs over 72 hours">
+                <table class="chart-data">
+                  <caption class="visually-hidden">Observations, Monday 21 to Thursday 24 September</caption>
+                  <thead><tr><th scope="col">Time</th><th scope="col">HR</th><th scope="col">BP</th><th scope="col">SpO&#8322;</th><th scope="col">RR</th><th scope="col">Temp</th></tr></thead>
+                  <tbody><tr><th scope="row">Mon 08:00</th><td class="num">104</td><td class="num">146/88</td><td class="num">91</td><td class="num">24</td><td class="num">37.6</td></tr><tr><th scope="row">Mon 12:00</th><td class="num">102</td><td class="num">142/86</td><td class="num">91</td><td class="num">24</td><td class="num">37.4</td></tr><tr><th scope="row">Mon 16:00</th><td class="num">99</td><td class="num">139/84</td><td class="num">92</td><td class="num">23</td><td class="num">37.2</td></tr><tr><th scope="row">Mon 20:00</th><td class="num">101</td><td class="num">141/85</td><td class="num">92</td><td class="num">23</td><td class="num">37.5</td></tr><tr><th scope="row">Tue 00:00</th><td class="num">97</td><td class="num">136/82</td><td class="num">92</td><td class="num">22</td><td class="num">37.1</td></tr><tr><th scope="row">Tue 04:00</th><td class="num">95</td><td class="num">134/81</td><td class="num">93</td><td class="num">22</td><td class="num">36.9</td></tr><tr><th scope="row">Tue 08:00</th><td class="num">96</td><td class="num">131/80</td><td class="num">93</td><td class="num">22</td><td class="num">37.0</td></tr><tr><th scope="row">Tue 12:00</th><td class="num">94</td><td class="num">133/80</td><td class="num">92</td><td class="num">21</td><td class="num">37.2</td></tr><tr><th scope="row">Tue 16:00</th><td class="num">98</td><td class="num">130/78</td><td class="num">93</td><td class="num">22</td><td class="num">36.9</td></tr><tr><th scope="row">Tue 20:00</th><td class="num">93</td><td class="num">128/77</td><td class="num">94</td><td class="num">21</td><td class="num">36.8</td></tr><tr><th scope="row">Wed 00:00</th><td class="num">91</td><td class="num">127/76</td><td class="num">94</td><td class="num">20</td><td class="num">37.0</td></tr><tr><th scope="row">Wed 04:00</th><td class="num">94</td><td class="num">129/78</td><td class="num">93</td><td class="num">21</td><td class="num">37.1</td></tr><tr><th scope="row">Wed 08:00</th><td class="num">90</td><td class="num">125/75</td><td class="num">94</td><td class="num">20</td><td class="num">36.8</td></tr><tr><th scope="row">Wed 12:00</th><td class="num">92</td><td class="num">126/76</td><td class="num">95</td><td class="num">20</td><td class="num">36.9</td></tr><tr><th scope="row">Wed 16:00</th><td class="num">89</td><td class="num">123/74</td><td class="num">94</td><td class="num">19</td><td class="num">37.0</td></tr><tr><th scope="row">Wed 20:00</th><td class="num">91</td><td class="num">125/75</td><td class="num">95</td><td class="num">20</td><td class="num">37.2</td></tr><tr><th scope="row">Thu 00:00</th><td class="num">88</td><td class="num">122/73</td><td class="num">95</td><td class="num">19</td><td class="num">36.9</td></tr><tr><th scope="row">Thu 04:00</th><td class="num">90</td><td class="num">126/75</td><td class="num">94</td><td class="num">20</td><td class="num">37.0</td></tr><tr><th scope="row">Thu 08:00</th><td class="num">88</td><td class="num">124/74</td><td class="num">94</td><td class="num">21</td><td class="num">37.3</td></tr></tbody>
+                </table>
+              </figure>
+            </div>
+          </section>
+        </div>
+        <div class="col-xl-4">
+          <div class="d-grid gap-3 h-100">
+            <section class="panel" aria-labelledby="prob-title">
+              <header class="panel-head"><h2 class="panel-title" id="prob-title">Problem list</h2><span class="panel-meta">5 active</span></header>
+              <ul class="problem-list"><li class="is-primary"><strong>Heart failure with reduced ejection fraction</strong><span>EF 30%, NYHA III &middot; primary</span></li><li class=""><strong>Chronic kidney disease, stage 3b</strong><span>Baseline creatinine 125 &micro;mol/L</span></li><li class=""><strong>Type 2 diabetes</strong><span>HbA1c 58 mmol/mol</span></li><li class=""><strong>Paroxysmal atrial fibrillation</strong><span>CHA&#8322;DS&#8322;-VASc 5</span></li><li class=""><strong>Hypertension</strong><span>Since 2011</span></li></ul>
+            </section>
+            <section class="panel" aria-labelledby="team-title">
+              <header class="panel-head"><h2 class="panel-title" id="team-title">Care team</h2><span class="panel-meta">Bleep</span></header>
+              <ul class="oncall-list oncall-list--panel"><li><span class="av av--navy av--sm" aria-hidden="true">AO</span><div><strong>Dr. Adaeze Okafor</strong><span>Attending, Cardiology</span></div><span class="bleep">4471</span></li><li><span class="av av--slate av--sm" aria-hidden="true">IC</span><div><strong>Dr. Imogen Clarke</strong><span>Registrar, Cardiology</span></div><span class="bleep">4480</span></li><li><span class="av av--coral av--sm" aria-hidden="true">GM</span><div><strong>Grace Mensah</strong><span>Charge nurse, Ward 3A</span></div><span class="bleep">3A-01</span></li><li><span class="av av--teal av--sm" aria-hidden="true">TN</span><div><strong>Tariq Nasser</strong><span>Ward pharmacist</span></div><span class="bleep">7712</span></li></ul>
+            </section>
+          </div>
+        </div>
+      </div>
+      <section class="panel mb-3" id="meds" aria-labelledby="meds-title">
+        <header class="panel-head">
+          <div>
+            <h2 class="panel-title" id="meds-title">Medications</h2>
+            <p class="panel-sub">Inpatient chart &middot; reconciled by pharmacy 23 Sep</p>
+          </div>
+          <span class="panel-meta">8 items &middot; 2 held</span>
+        </header>
+        <div class="table-scroll">
+          <table class="table table-clinical mb-0">
+            <thead><tr><th scope="col">Medicine</th><th scope="col" class="d-none d-md-table-cell">Dose</th><th scope="col" class="d-none d-md-table-cell">Route</th><th scope="col" class="d-none d-md-table-cell">Frequency</th><th scope="col">Next due</th><th scope="col">Status</th></tr></thead>
+            <tbody>
+                <tr>
+                  <td><strong class="med-name">Furosemide</strong><span class="cell-sub d-md-none">40 mg &middot; IV &middot; Twice daily (08:00, 14:00)</span><span class="cell-sub">Sulfonamide allergy reviewed: non-antibiotic, no previous reaction.</span></td>
+                  <td class="mono d-none d-md-table-cell text-nowrap">40 mg</td>
+                  <td class="d-none d-md-table-cell">IV</td>
+                  <td class="d-none d-md-table-cell">Twice daily (08:00, 14:00)</td>
+                  <td class="mono text-nowrap">14:00</td>
+                  <td><span class="med-st med-st--active">Active</span></td>
+                </tr>
+                <tr>
+                  <td><strong class="med-name">Bisoprolol</strong><span class="cell-sub d-md-none">2.5 mg &middot; Oral &middot; Once daily</span></td>
+                  <td class="mono d-none d-md-table-cell text-nowrap">2.5 mg</td>
+                  <td class="d-none d-md-table-cell">Oral</td>
+                  <td class="d-none d-md-table-cell">Once daily</td>
+                  <td class="mono text-nowrap">Fri 08:00</td>
+                  <td><span class="med-st med-st--given">Given 08:04</span></td>
+                </tr>
+                <tr>
+                  <td><strong class="med-name">Dapagliflozin</strong><span class="cell-sub d-md-none">10 mg &middot; Oral &middot; Once daily</span></td>
+                  <td class="mono d-none d-md-table-cell text-nowrap">10 mg</td>
+                  <td class="d-none d-md-table-cell">Oral</td>
+                  <td class="d-none d-md-table-cell">Once daily</td>
+                  <td class="mono text-nowrap">Fri 08:00</td>
+                  <td><span class="med-st med-st--given">Given 08:04</span></td>
+                </tr>
+                <tr>
+                  <td><strong class="med-name">Ramipril</strong><span class="cell-sub d-md-none">2.5 mg &middot; Oral &middot; Once daily</span><span class="cell-sub">Held while K+ is 5.6 mmol/L. Review with evening U&amp;E.</span></td>
+                  <td class="mono d-none d-md-table-cell text-nowrap">2.5 mg</td>
+                  <td class="d-none d-md-table-cell">Oral</td>
+                  <td class="d-none d-md-table-cell">Once daily</td>
+                  <td class="mono text-nowrap">&mdash;</td>
+                  <td><span class="med-st med-st--held">Held</span></td>
+                </tr>
+                <tr>
+                  <td><strong class="med-name">Enoxaparin</strong><span class="cell-sub d-md-none">40 mg &middot; SC &middot; Once daily</span></td>
+                  <td class="mono d-none d-md-table-cell text-nowrap">40 mg</td>
+                  <td class="d-none d-md-table-cell">SC</td>
+                  <td class="d-none d-md-table-cell">Once daily</td>
+                  <td class="mono text-nowrap">18:00</td>
+                  <td><span class="med-st med-st--active">Active</span></td>
+                </tr>
+                <tr>
+                  <td><strong class="med-name">Atorvastatin</strong><span class="cell-sub d-md-none">40 mg &middot; Oral &middot; At night</span></td>
+                  <td class="mono d-none d-md-table-cell text-nowrap">40 mg</td>
+                  <td class="d-none d-md-table-cell">Oral</td>
+                  <td class="d-none d-md-table-cell">At night</td>
+                  <td class="mono text-nowrap">22:00</td>
+                  <td><span class="med-st med-st--active">Active</span></td>
+                </tr>
+                <tr>
+                  <td><strong class="med-name">Metformin</strong><span class="cell-sub d-md-none">500 mg &middot; Oral &middot; Twice daily</span><span class="cell-sub">Held while eGFR is below 35.</span></td>
+                  <td class="mono d-none d-md-table-cell text-nowrap">500 mg</td>
+                  <td class="d-none d-md-table-cell">Oral</td>
+                  <td class="d-none d-md-table-cell">Twice daily</td>
+                  <td class="mono text-nowrap">&mdash;</td>
+                  <td><span class="med-st med-st--held">Held</span></td>
+                </tr>
+                <tr>
+                  <td><strong class="med-name">Paracetamol</strong><span class="cell-sub d-md-none">1 g &middot; Oral &middot; Up to 4 times daily, as needed</span><span class="cell-sub">Last given 06:10.</span></td>
+                  <td class="mono d-none d-md-table-cell text-nowrap">1 g</td>
+                  <td class="d-none d-md-table-cell">Oral</td>
+                  <td class="d-none d-md-table-cell">Up to 4 times daily, as needed</td>
+                  <td class="mono text-nowrap">PRN</td>
+                  <td><span class="med-st med-st--prn">As needed</span></td>
+                </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+      <div class="row g-3">
+        <div class="col-xl-7">
+          <section class="panel h-100" id="labs" aria-labelledby="labs-title">
+            <header class="panel-head">
+              <div>
+                <h2 class="panel-title" id="labs-title">Lab results</h2>
+                <p class="panel-sub">Collected Thu 24 Sep, 06:10 &middot; reported 07:32</p>
+              </div>
+              <div class="form-check form-switch switch-clinical js-only">
+                <input class="form-check-input" type="checkbox" role="switch" id="abnormal-only">
+                <label class="form-check-label" for="abnormal-only">Abnormal only</label>
+              </div>
+            </header>
+            <div class="table-scroll">
+              <table class="table table-clinical table-labs mb-0">
+                <thead><tr><th scope="col">Test</th><th scope="col" class="num">Result</th><th scope="col">Units</th><th scope="col" class="d-none d-sm-table-cell">Reference</th><th scope="col">Flag</th><th scope="col" class="d-none d-md-table-cell">Previous</th></tr></thead>
+                <tbody>
+                <tr class="is-abnormal" data-abnormal="1">
+                  <th scope="row">Sodium</th>
+                  <td class="num lab-val">132</td>
+                  <td class="cell-unit">mmol/L</td>
+                  <td class="d-none d-sm-table-cell"><span class="range" style="--lo:33.3%;--hi:66.7%;--v:23.3%" aria-hidden="true"><i></i></span><span class="cell-sub mono">135&ndash;145</span></td>
+                  <td><span class="lab-flag lab-flag--l" title="Low">L</span></td>
+                  <td class="d-none d-md-table-cell"><span class="trend trend--down is-worse" title="Previous 134"><svg class="ic ic-xs" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m22 17-8.5-8.5-5 5L2 7"/><path d="M16 17h6v-6"/></svg> 134</span></td>
+                </tr>
+                <tr class="is-abnormal" data-abnormal="1">
+                  <th scope="row">Potassium</th>
+                  <td class="num lab-val">5.6</td>
+                  <td class="cell-unit">mmol/L</td>
+                  <td class="d-none d-sm-table-cell"><span class="range" style="--lo:25.0%;--hi:62.5%;--v:77.5%" aria-hidden="true"><i></i></span><span class="cell-sub mono">3.5&ndash;5.0</span></td>
+                  <td><span class="lab-flag lab-flag--h" title="High">H</span></td>
+                  <td class="d-none d-md-table-cell"><span class="trend trend--up is-worse" title="Previous 5.3"><svg class="ic ic-xs" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m22 7-8.5 8.5-5-5L2 17"/><path d="M16 7h6v6"/></svg> 5.3</span></td>
+                </tr>
+                <tr class="is-abnormal" data-abnormal="1">
+                  <th scope="row">Urea</th>
+                  <td class="num lab-val">11.8</td>
+                  <td class="cell-unit">mmol/L</td>
+                  <td class="d-none d-sm-table-cell"><span class="range" style="--lo:15.6%;--hi:48.8%;--v:73.8%" aria-hidden="true"><i></i></span><span class="cell-sub mono">2.5&ndash;7.8</span></td>
+                  <td><span class="lab-flag lab-flag--h" title="High">H</span></td>
+                  <td class="d-none d-md-table-cell"><span class="trend trend--down is-better" title="Previous 12.6"><svg class="ic ic-xs" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m22 17-8.5-8.5-5 5L2 7"/><path d="M16 17h6v-6"/></svg> 12.6</span></td>
+                </tr>
+                <tr class="is-abnormal" data-abnormal="1">
+                  <th scope="row">Creatinine</th>
+                  <td class="num lab-val">142</td>
+                  <td class="cell-unit">&micro;mol/L</td>
+                  <td class="d-none d-sm-table-cell"><span class="range" style="--lo:22.5%;--hi:45.0%;--v:71.0%" aria-hidden="true"><i></i></span><span class="cell-sub mono">45&ndash;90</span></td>
+                  <td><span class="lab-flag lab-flag--h" title="High">H</span></td>
+                  <td class="d-none d-md-table-cell"><span class="trend trend--down is-better" title="Previous 151"><svg class="ic ic-xs" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m22 17-8.5-8.5-5 5L2 7"/><path d="M16 17h6v-6"/></svg> 151</span></td>
+                </tr>
+                <tr class="is-abnormal" data-abnormal="1">
+                  <th scope="row">eGFR</th>
+                  <td class="num lab-val">34</td>
+                  <td class="cell-unit">mL/min</td>
+                  <td class="d-none d-sm-table-cell"><span class="range" style="--lo:50.0%;--hi:98.0%;--v:28.3%" aria-hidden="true"><i></i></span><span class="cell-sub mono">&gt; 60</span></td>
+                  <td><span class="lab-flag lab-flag--l" title="Low">L</span></td>
+                  <td class="d-none d-md-table-cell"><span class="trend trend--up is-better" title="Previous 31"><svg class="ic ic-xs" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m22 7-8.5 8.5-5-5L2 17"/><path d="M16 7h6v6"/></svg> 31</span></td>
+                </tr>
+                <tr class="is-abnormal" data-abnormal="1">
+                  <th scope="row">NT-proBNP</th>
+                  <td class="num lab-val">4,820</td>
+                  <td class="cell-unit">ng/L</td>
+                  <td class="d-none d-sm-table-cell"><span class="range" style="--lo:2.0%;--hi:6.7%;--v:80.3%" aria-hidden="true"><i></i></span><span class="cell-sub mono">&lt; 400</span></td>
+                  <td><span class="lab-flag lab-flag--h" title="High">H</span></td>
+                  <td class="d-none d-md-table-cell"><span class="trend trend--down is-better" title="Previous 6,150"><svg class="ic ic-xs" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m22 17-8.5-8.5-5 5L2 7"/><path d="M16 17h6v-6"/></svg> 6,150</span></td>
+                </tr>
+                <tr class="is-abnormal" data-abnormal="1">
+                  <th scope="row">Haemoglobin</th>
+                  <td class="num lab-val">112</td>
+                  <td class="cell-unit">g/L</td>
+                  <td class="d-none d-sm-table-cell"><span class="range" style="--lo:31.8%;--hi:77.3%;--v:29.1%" aria-hidden="true"><i></i></span><span class="cell-sub mono">115&ndash;165</span></td>
+                  <td><span class="lab-flag lab-flag--l" title="Low">L</span></td>
+                  <td class="d-none d-md-table-cell"><span class="trend trend--up is-better" title="Previous 110"><svg class="ic ic-xs" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m22 7-8.5 8.5-5-5L2 17"/><path d="M16 7h6v6"/></svg> 110</span></td>
+                </tr>
+                <tr class="" data-abnormal="0">
+                  <th scope="row">White cells</th>
+                  <td class="num lab-val">7.8</td>
+                  <td class="cell-unit">&times;10&#8313;/L</td>
+                  <td class="d-none d-sm-table-cell"><span class="range" style="--lo:25.0%;--hi:68.8%;--v:48.8%" aria-hidden="true"><i></i></span><span class="cell-sub mono">4.0&ndash;11.0</span></td>
+                  <td><span class="lab-flag lab-flag--n" title="Within range">&ndash;</span></td>
+                  <td class="d-none d-md-table-cell"><span class="trend trend--down" title="Previous 8.4"><svg class="ic ic-xs" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m22 17-8.5-8.5-5 5L2 7"/><path d="M16 17h6v-6"/></svg> 8.4</span></td>
+                </tr>
+                <tr class="" data-abnormal="0">
+                  <th scope="row">Platelets</th>
+                  <td class="num lab-val">231</td>
+                  <td class="cell-unit">&times;10&#8313;/L</td>
+                  <td class="d-none d-sm-table-cell"><span class="range" style="--lo:22.2%;--hi:77.8%;--v:40.2%" aria-hidden="true"><i></i></span><span class="cell-sub mono">150&ndash;400</span></td>
+                  <td><span class="lab-flag lab-flag--n" title="Within range">&ndash;</span></td>
+                  <td class="d-none d-md-table-cell"><span class="trend trend--up" title="Previous 224"><svg class="ic ic-xs" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m22 7-8.5 8.5-5-5L2 17"/><path d="M16 7h6v6"/></svg> 224</span></td>
+                </tr>
+                <tr class="is-abnormal" data-abnormal="1">
+                  <th scope="row">CRP</th>
+                  <td class="num lab-val">9</td>
+                  <td class="cell-unit">mg/L</td>
+                  <td class="d-none d-sm-table-cell"><span class="range" style="--lo:2.0%;--hi:16.7%;--v:30.0%" aria-hidden="true"><i></i></span><span class="cell-sub mono">&lt; 5</span></td>
+                  <td><span class="lab-flag lab-flag--h" title="High">H</span></td>
+                  <td class="d-none d-md-table-cell"><span class="trend trend--down is-better" title="Previous 14"><svg class="ic ic-xs" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m22 17-8.5-8.5-5 5L2 7"/><path d="M16 17h6v-6"/></svg> 14</span></td>
+                </tr>
+                <tr class="" data-abnormal="0">
+                  <th scope="row">Magnesium</th>
+                  <td class="num lab-val">0.84</td>
+                  <td class="cell-unit">mmol/L</td>
+                  <td class="d-none d-sm-table-cell"><span class="range" style="--lo:33.3%;--hi:66.7%;--v:48.9%" aria-hidden="true"><i></i></span><span class="cell-sub mono">0.70&ndash;1.00</span></td>
+                  <td><span class="lab-flag lab-flag--n" title="Within range">&ndash;</span></td>
+                  <td class="d-none d-md-table-cell"><span class="trend trend--up" title="Previous 0.79"><svg class="ic ic-xs" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m22 7-8.5 8.5-5-5L2 17"/><path d="M16 7h6v6"/></svg> 0.79</span></td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+        </div>
+        <div class="col-xl-5">
+          <section class="panel h-100" id="discharge" aria-labelledby="plan-title">
+            <header class="panel-head"><h2 class="panel-title" id="plan-title">Plan &amp; discharge readiness</h2><span class="panel-meta">EDD 26 Sep</span></header>
+            <div class="panel-body">
+              <p class="subhead">Coming up</p>
+              <ul class="upcoming-list"><li><time class="mono">Today 18:00</time><div><strong>Repeat U&amp;E</strong><span>Phlebotomy, Ward 3A</span></div></li><li><time class="mono">Fri 10:30</time><div><strong>Transthoracic echo</strong><span>Cardiac Investigations, level 2</span></div></li><li><time class="mono">Fri 14:00</time><div><strong>Heart failure nurse review</strong><span>Ward 3A</span></div></li><li><time class="mono">Sat 11:00</time><div><strong>Planned discharge</strong><span>Pending echo and oral diuretic switch</span></div></li></ul>
+              <div class="d-flex align-items-center justify-content-between mt-4 mb-2">
+                <p class="subhead mb-0">Discharge checklist</p>
+                <span class="mono small-muted">2 of 6</span>
+              </div>
+              <div class="meter meter--teal mb-3" role="img" aria-label="2 of 6 discharge steps complete"><span style="width:33%"></span></div>
+              <ul class="check-list"><li class="is-done"><span class="check-box" aria-hidden="true"><svg class="ic ic-xs" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"/></svg></span>Medicines reconciled<span class="visually-hidden"> (done)</span></li><li class="is-done"><span class="check-box" aria-hidden="true"><svg class="ic ic-xs" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"/></svg></span>Patient and family education<span class="visually-hidden"> (done)</span></li><li class=""><span class="check-box" aria-hidden="true"></span>Oral diuretic dose agreed<span class="visually-hidden"> (to do)</span></li><li class=""><span class="check-box" aria-hidden="true"></span>Echo reported<span class="visually-hidden"> (to do)</span></li><li class=""><span class="check-box" aria-hidden="true"></span>Heart failure nurse follow-up booked<span class="visually-hidden"> (to do)</span></li><li class=""><span class="check-box" aria-hidden="true"></span>Transport arranged<span class="visually-hidden"> (to do)</span></li></ul>
+            </div>
+          </section>
+        </div>
+      </div>
+      <section class="panel mt-3" id="notes" aria-labelledby="notes-title">
+        <header class="panel-head">
+          <div>
+            <h2 class="panel-title" id="notes-title">Clinical notes</h2>
+            <p class="panel-sub">Newest first &middot; all disciplines</p>
+          </div>
+          <span class="panel-meta" id="notes-count">6 entries</span>
+        </header>
+        <div class="panel-body">
+          <div class="row g-4">
+            <div class="col-lg-8">
+              <ol class="timeline" id="timeline">
+                  <li class="tl-item tl-item--doctor">
+                    <span class="tl-dot" aria-hidden="true"></span>
+                    <article class="tl-card">
+                      <header class="tl-head"><span class="av av--navy av--sm" aria-hidden="true">AO</span><div class="tl-who"><strong>Dr. Adaeze Okafor</strong><span>Attending, Cardiology</span></div><span class="tl-type">Ward round</span><time class="tl-time mono">Thu 24 Sep, 08:20</time></header>
+                      <p>Breathless on exertion only; orthopnoea improved from four pillows to two. Net fluid balance &minus;1.9 L over 24 hours, weight 71.4 kg (&minus;3.5 kg since admission). Bibasal crackles reduced. K+ 5.6: hold ramipril, repeat U&amp;E this evening. Continue IV furosemide 40 mg twice daily; switch to oral tomorrow if creatinine is stable.</p>
+                    </article>
+                  </li>
+                  <li class="tl-item tl-item--nurse">
+                    <span class="tl-dot" aria-hidden="true"></span>
+                    <article class="tl-card">
+                      <header class="tl-head"><span class="av av--coral av--sm" aria-hidden="true">GM</span><div class="tl-who"><strong>Grace Mensah</strong><span>Charge nurse, Ward 3A</span></div><span class="tl-type">Nursing</span><time class="tl-time mono">Thu 24 Sep, 06:40</time></header>
+                      <p>Settled night, slept upright on two pillows. Passed 2.1 L of urine overnight; strict fluid balance continued. 1.5 L daily fluid restriction explained again. Keen to be home by the weekend.</p>
+                    </article>
+                  </li>
+                  <li class="tl-item tl-item--allied">
+                    <span class="tl-dot" aria-hidden="true"></span>
+                    <article class="tl-card">
+                      <header class="tl-head"><span class="av av--teal av--sm" aria-hidden="true">TN</span><div class="tl-who"><strong>Tariq Nasser</strong><span>Ward pharmacist</span></div><span class="tl-type">Pharmacy</span><time class="tl-time mono">Wed 23 Sep, 15:10</time></header>
+                      <p>Medicines reconciliation complete. Furosemide with documented sulfonamide antibiotic allergy reviewed: non-antibiotic sulfonamide, tolerated loop diuretics before, continue with monitoring. Metformin held while eGFR is below 35.</p>
+                    </article>
+                  </li>
+                  <li class="tl-item tl-item--allied">
+                    <span class="tl-dot" aria-hidden="true"></span>
+                    <article class="tl-card">
+                      <header class="tl-head"><span class="av av--coral av--sm" aria-hidden="true">LF</span><div class="tl-who"><strong>Lena Fischer</strong><span>Dietitian</span></div><span class="tl-type">Dietetics</span><time class="tl-time mono">Wed 23 Sep, 11:30</time></header>
+                      <p>Low-sodium diet (under 2 g a day) explained with her daughter-in-law present. Diabetic menu. Advised daily weights at home and to call the heart failure nurses if weight rises by 2 kg in 3 days.</p>
+                    </article>
+                  </li>
+                  <li class="tl-item tl-item--allied">
+                    <span class="tl-dot" aria-hidden="true"></span>
+                    <article class="tl-card">
+                      <header class="tl-head"><span class="av av--sky av--sm" aria-hidden="true">JA</span><div class="tl-who"><strong>Joel Amankwah</strong><span>Physiotherapist</span></div><span class="tl-type">Physiotherapy</span><time class="tl-time mono">Tue 22 Sep, 14:00</time></header>
+                      <p>Walked 40 m with a frame. SpO&#8322; dipped to 91% on exertion and recovered within 2 minutes at rest. Stairs assessment deferred until after the diuretic switch.</p>
+                    </article>
+                  </li>
+                  <li class="tl-item tl-item--doctor">
+                    <span class="tl-dot" aria-hidden="true"></span>
+                    <article class="tl-card">
+                      <header class="tl-head"><span class="av av--slate av--sm" aria-hidden="true">IC</span><div class="tl-who"><strong>Dr. Imogen Clarke</strong><span>Registrar, Cardiology</span></div><span class="tl-type">Admission</span><time class="tl-time mono">Sat 19 Sep, 16:45</time></header>
+                      <p>Five days of worsening breathlessness, orthopnoea and ankle swelling to mid-shin. Known HFrEF (EF 30% in March). Missed diuretic doses while visiting family. Chest X-ray: bilateral effusions, upper lobe diversion. Started IV furosemide; admitted to Ward 3A.</p>
+                    </article>
+                  </li>
+              </ol>
+            </div>
+            <div class="col-lg-4">
+              <form class="note-form" id="note-form" novalidate>
+                <h3 class="note-form-title">Add a note</h3>
+                <div class="mb-3">
+                  <label class="form-label" for="n-type">Note type</label>
+                  <select class="form-select" id="n-type" required>
+                    <option value="Ward round">Ward round</option>
+                    <option value="Progress">Progress</option>
+                    <option value="Nursing">Nursing</option>
+                    <option value="Family discussion">Family discussion</option>
+                  </select>
+                </div>
+                <div class="mb-3">
+                  <label class="form-label" for="n-text">Note</label>
+                  <textarea class="form-control" id="n-text" rows="6" required minlength="12" placeholder="Assessment, plan and who you spoke to"></textarea>
+                  <div class="invalid-feedback">Write at least 12 characters.</div>
+                </div>
+                <button type="submit" class="btn btn-primary w-100"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"/></svg> Sign and add note</button>
+                <p class="fine-print mt-2 mb-0">Signed as Dr. A. Okafor. Notes are added to this page in your browser only.</p>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer class="app-footer">
+      <p>&copy; St. Aldric General Hospital &middot; Rounds HMS 2.4 &middot; All names and records are fictional demo data.</p>
+      <p>Template by <a href="https://uicookies.com/">uiCookies</a></p>
+    </footer>
+  </div>
+  </div>
+
+  <div class="toast-live" id="live" role="status" aria-live="polite"></div>
+  <script src="js/vendor/bootstrap.bundle.min.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

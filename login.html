@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en" data-bs-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sign In — Rounds Hospital Management System</title>
+  <meta name="description" content="Sign-in screen for the Rounds hospital management system: staff ID, password with show and hide, and a remembered workstation option.">
+  <meta name="theme-color" content="#0b2a4a">
+  <script>document.documentElement.classList.add('js');try{var t=localStorage.getItem('rounds-theme');if(!t&&window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches)t='dark';if(t)document.documentElement.setAttribute('data-bs-theme',t);if(localStorage.getItem('rounds-sidebar')==='collapsed')document.documentElement.classList.add('sidebar-collapsed');}catch(e){}</script>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%235ee0c1'/%3E%3Ccircle cx='16' cy='16' r='9' fill='none' stroke='%230b2a4a' stroke-width='2.6' stroke-linecap='round' stroke-dasharray='46 11' transform='rotate(-58 16 16)'/%3E%3Cpath d='M16 12.2v7.6M12.2 16h7.6' stroke='%230b2a4a' stroke-width='2.6' stroke-linecap='round'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&amp;family=IBM+Plex+Sans:wght@400;500;600;700&amp;display=swap">
+  <link rel="stylesheet" href="css/vendor/bootstrap.min.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="page-login">
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <div class="auth">
+    <aside class="auth-aside" aria-label="About Rounds">
+      <img class="auth-photo" src="img/login-hospital.jpg" alt="Geometric white facade of a modern building" width="1200" height="1400">
+      <div class="auth-aside-inner">
+        <p class="auth-kicker">St. Aldric General Hospital</p>
+        <p class="auth-quote">Beds, clinics and ward rounds on one screen, from the bed meeting to the night handover.</p>
+        <ul class="auth-status" aria-label="System status">
+          <li><span class="status-dot" aria-hidden="true"></span>Patient record sync <span class="mono">09:41</span></li>
+          <li><span class="status-dot" aria-hidden="true"></span>Laboratory interface online</li>
+          <li><span class="status-dot" aria-hidden="true"></span>Imaging archive online</li>
+        </ul>
+      </div>
+    </aside>
+    <div class="auth-main">
+      <header class="auth-head">
+        <a class="brand brand--ink" href="index.html"><svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#5ee0c1"/><circle cx="16" cy="16" r="9" fill="none" stroke="#0b2a4a" stroke-width="2.6" stroke-linecap="round" stroke-dasharray="46 11" transform="rotate(-58 16 16)"/><path d="M16 12.2v7.6M12.2 16h7.6" stroke="#0b2a4a" stroke-width="2.6" stroke-linecap="round"/></svg><span class="brand-text"><span class="brand-name">Rounds</span><span class="brand-org">Hospital management</span></span></a>
+        <button class="icon-btn icon-btn--line" type="button" id="theme-toggle" aria-label="Switch to dark theme"><svg class="ic ic-moon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg><svg class="ic ic-sun" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg></button>
+      </header>
+      <main id="main" class="auth-body" tabindex="-1">
+        <h1 class="auth-title">Sign in to Rounds</h1>
+        <p class="auth-sub">Use your staff ID or hospital email. Shared workstations sign out after 15 minutes idle.</p>
+        <form id="login-form" class="auth-form" novalidate>
+          <div class="mb-3">
+            <label class="form-label" for="l-id">Staff ID or email</label>
+            <input class="form-control form-control-lg" id="l-id" name="id" required autocomplete="username" placeholder="e.g. SA-10482 or a.okafor@example.com">
+            <div class="invalid-feedback">Enter your staff ID or hospital email.</div>
+          </div>
+          <div class="mb-3">
+            <div class="d-flex justify-content-between align-items-baseline">
+              <label class="form-label" for="l-pass">Password</label>
+              <button type="button" class="link-btn" id="forgot-btn" aria-expanded="false" aria-controls="forgot-panel">Forgot password?</button>
+            </div>
+            <div class="password-field">
+              <input class="form-control form-control-lg" id="l-pass" name="password" type="password" required minlength="8" autocomplete="current-password">
+              <button type="button" class="pw-toggle" id="pw-toggle" aria-label="Show password" aria-pressed="false"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></svg></button>
+              <div class="invalid-feedback">Passwords have at least 8 characters.</div>
+            </div>
+          </div>
+          <div class="forgot-panel" id="forgot-panel" hidden>
+            <p><strong>Password reset.</strong> Contact the IT service desk on <span class="mono">555-0199</span> or ext. <span class="mono">4000</span>, available 24 hours. Have your staff ID ready.</p>
+          </div>
+          <div class="form-check mb-4">
+            <input class="form-check-input" type="checkbox" id="l-remember">
+            <label class="form-check-label" for="l-remember">Remember this workstation for 12 hours</label>
+          </div>
+          <button type="submit" class="btn btn-primary btn-lg w-100"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg> Sign in</button>
+          <div class="form-done form-done--inline" id="login-done" hidden tabindex="-1">
+            <span class="form-done-icon"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"/></svg></span>
+            <p><strong>Details accepted.</strong> This demo has no authentication; connect the form to your identity provider.</p>
+            <a class="btn btn-outline" href="index.html">Continue to the overview <svg class="ic ic-sm" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          </div>
+        </form>
+        <p class="auth-help"><svg class="ic ic-sm" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/></svg><span>Access is logged and audited. Report a lost smart card to security on ext. <span class="mono">2222</span>.</span></p>
+      </main>
+      <footer class="app-footer auth-foot">
+        <p>&copy; St. Aldric General Hospital &middot; Rounds HMS 2.4</p>
+        <p>Template by <a href="https://uicookies.com/">uiCookies</a></p>
+      </footer>
+    </div>
+  </div>
+  <div class="toast-live" id="live" role="status" aria-live="polite"></div>
+  <script src="js/vendor/bootstrap.bundle.min.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

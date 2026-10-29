@@ -1,0 +1,389 @@
+<!doctype html>
+<html lang="en" data-bs-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Hospital Overview — Rounds Hospital Management System</title>
+  <meta name="description" content="Hospital management dashboard for St. Aldric General: bed occupancy by ward, admissions and discharges, ED wait, OPD appointments, critical alerts and staff on duty.">
+  <meta name="theme-color" content="#0b2a4a">
+  <script>document.documentElement.classList.add('js');try{var t=localStorage.getItem('rounds-theme');if(!t&&window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches)t='dark';if(t)document.documentElement.setAttribute('data-bs-theme',t);if(localStorage.getItem('rounds-sidebar')==='collapsed')document.documentElement.classList.add('sidebar-collapsed');}catch(e){}</script>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%235ee0c1'/%3E%3Ccircle cx='16' cy='16' r='9' fill='none' stroke='%230b2a4a' stroke-width='2.6' stroke-linecap='round' stroke-dasharray='46 11' transform='rotate(-58 16 16)'/%3E%3Cpath d='M16 12.2v7.6M12.2 16h7.6' stroke='%230b2a4a' stroke-width='2.6' stroke-linecap='round'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&amp;family=IBM+Plex+Sans:wght@400;500;600;700&amp;display=swap">
+  <link rel="stylesheet" href="css/vendor/bootstrap.min.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="page-overview">
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <div class="app">
+  <aside class="sidebar offcanvas-lg offcanvas-start" id="sidebar" tabindex="-1" aria-labelledby="sidebar-title">
+    <div class="sidebar-inner">
+      <div class="sidebar-head">
+        <a class="brand" href="index.html"><svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#5ee0c1"/><circle cx="16" cy="16" r="9" fill="none" stroke="#0b2a4a" stroke-width="2.6" stroke-linecap="round" stroke-dasharray="46 11" transform="rotate(-58 16 16)"/><path d="M16 12.2v7.6M12.2 16h7.6" stroke="#0b2a4a" stroke-width="2.6" stroke-linecap="round"/></svg><span class="brand-text"><span class="brand-name" id="sidebar-title">Rounds</span><span class="brand-org">St. Aldric General</span></span></a>
+        <button type="button" class="icon-btn icon-btn--dark d-lg-none" data-bs-dismiss="offcanvas" data-bs-target="#sidebar" aria-label="Close navigation"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+      </div>
+      <nav class="sidebar-nav" aria-label="Primary">
+        <p class="nav-label">Clinical</p>
+        <ul class="side-list">
+          <li><a class="side-link is-active" href="index.html" aria-current="page" title="Overview"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3" y="3" width="7" height="9" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="14" y="12" width="7" height="9" rx="1"/><rect x="3" y="16" width="7" height="5" rx="1"/></svg><span class="side-label">Overview</span></a></li>
+          <li><a class="side-link" href="patients.html" title="Inpatients"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg><span class="side-label">Inpatients</span><span class="side-count">286</span></a></li>
+          <li><a class="side-link" href="patient.html" title="Patient record"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="8" y="2" width="8" height="4" rx="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="M12 11h4M12 16h4M8 11h.01M8 16h.01"/></svg><span class="side-label">Patient record</span></a></li>
+          <li><a class="side-link" href="appointments.html" title="OPD appointments"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg><span class="side-label">OPD appointments</span><span class="side-count">64</span></a></li>
+        </ul>
+        <p class="nav-label">Operations</p>
+        <ul class="side-list">
+          <li><a class="side-link" href="beds.html" title="Beds & wards"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M2 4v16"/><path d="M2 8h18a2 2 0 0 1 2 2v10"/><path d="M2 17h20"/><path d="M6 8v9"/></svg><span class="side-label">Beds &amp; wards</span><span class="side-count">36 free</span></a></li>
+          <li><a class="side-link" href="staff.html" title="Staff roster"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 3H4a2 2 0 0 0-2 2v4a6 6 0 0 0 12 0V5a2 2 0 0 0-2-2h-1"/><path d="M8 15v1a6 6 0 0 0 12 0v-3"/><circle cx="20" cy="11" r="2"/></svg><span class="side-label">Staff roster</span></a></li>
+        </ul>
+      </nav>
+      <div class="sidebar-foot">
+        <div class="shift-card">
+          <span class="av av--sky" aria-hidden="true">AO</span>
+          <div class="shift-card-body">
+            <strong>Dr. Adaeze Okafor</strong>
+            <span>Day shift &middot; 07:00&ndash;19:00</span>
+            <span class="shift-meter" role="img" aria-label="Shift 23 percent complete"><span style="width:23%"></span></span>
+          </div>
+        </div>
+        <a class="side-link side-link--quiet" href="login.html" title="Sign out"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="m16 17 5-5-5-5M21 12H9"/></svg><span class="side-label">Sign out</span></a>
+      </div>
+    </div>
+  </aside>
+  <div class="app-main">
+    <header class="topbar">
+      <button class="icon-btn d-lg-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebar" aria-controls="sidebar" aria-label="Open navigation"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+      <button class="icon-btn d-none d-lg-inline-flex" type="button" id="sidebar-collapse" aria-label="Collapse sidebar" aria-expanded="true"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 3v18"/><path d="m16 15-3-3 3-3"/></svg></button>
+      <form class="topbar-search" role="search" action="patients.html" method="get">
+        <label class="visually-hidden" for="global-search">Search patients by name, MRN or bed</label>
+        <svg class="ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+        <input id="global-search" name="q" type="search" placeholder="Search name, MRN or bed" autocomplete="off">
+        <kbd class="kbd" aria-hidden="true">/</kbd>
+      </form>
+      <div class="topbar-actions">
+        <span class="topbar-site d-none d-xl-inline-flex"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="4" y="2" width="16" height="20" rx="1"/><path d="M9 22v-4h6v4M8 6h.01M16 6h.01M12 6h.01M12 10h.01M12 14h.01M16 10h.01M16 14h.01M8 10h.01M8 14h.01"/></svg> Main campus</span>
+        <button class="icon-btn" type="button" id="theme-toggle" aria-label="Switch to dark theme"><svg class="ic ic-moon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg><svg class="ic ic-sun" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg></button>
+        <div class="dropdown">
+          <button class="icon-btn" type="button" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false" aria-label="Notifications, 4 unread" id="notif-btn"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg><span class="notif-badge" id="notif-count">4</span></button>
+          <div class="dropdown-menu dropdown-menu-end notif-menu">
+            <div class="notif-head"><strong>Notifications</strong><button type="button" class="link-btn" id="notif-read">Mark all read</button></div>
+            <ul class="notif-list"><li><a class="notif-item is-unread" href="patients.html"><span class="notif-icon notif-icon--coral"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9v4M12 17h.01"/></svg></span><span class="notif-text"><strong>Critical potassium 6.3 mmol/L</strong><span>4B-22 &middot; K. Asante</span></span><time class="notif-time">4 min ago</time></a></li><li><a class="notif-item is-unread" href="beds.html"><span class="notif-icon notif-icon--amber"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span><span class="notif-text"><strong>ED boarding over 4 hours</strong><span>2 patients awaiting medical beds</span></span><time class="notif-time">12 min ago</time></a></li><li><a class="notif-item is-unread" href="staff.html"><span class="notif-icon notif-icon--amber"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span><span class="notif-text"><strong>4B night shift is 1 RN short</strong><span>Open shift offered to bank staff</span></span><time class="notif-time">26 min ago</time></a></li><li><a class="notif-item is-unread" href="patient.html"><span class="notif-icon notif-icon--teal"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></span><span class="notif-text"><strong>Echo confirmed for M. Ventura</strong><span>Fri 25 Sep, 10:30 &middot; Cardiac Investigations</span></span><time class="notif-time">1 h ago</time></a></li></ul>
+          </div>
+        </div>
+        <div class="dropdown">
+          <button class="user-btn" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Account menu for Dr. Adaeze Okafor"><span class="av av--sky" aria-hidden="true">AO</span><span class="user-meta"><strong>Dr. A. Okafor</strong><small>Cardiology</small></span><svg class="ic ic-sm" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6"/></svg></button>
+          <ul class="dropdown-menu dropdown-menu-end user-menu">
+            <li class="user-menu-head"><strong>Dr. Adaeze Okafor</strong><span>Consultant cardiologist &middot; Bleep 4471</span></li>
+            <li><a class="dropdown-item" href="staff.html"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg> My shifts</a></li>
+            <li><a class="dropdown-item" href="patients.html"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg> My patients</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="login.html"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="m16 17 5-5-5-5M21 12H9"/></svg> Sign out</a></li>
+          </ul>
+        </div>
+      </div>
+    </header>
+    <div class="census" role="region" aria-label="Hospital census at 09:42">
+      <ul class="census-list"><li class=""><span class="census-k">Census</span><span class="census-v">286<span class="census-of">/340</span></span></li><li class=""><span class="census-k">Occupancy</span><span class="census-v">84.1%</span></li><li class=""><span class="census-k">Beds ready</span><span class="census-v" data-census="free">36</span></li><li class="is-alert"><span class="census-k">ED wait</span><span class="census-v">42 min</span></li><li class=""><span class="census-k">ED queue</span><span class="census-v">27</span></li><li class="is-warn"><span class="census-k">Awaiting bed</span><span class="census-v">6</span></li><li class=""><span class="census-k">Theatres</span><span class="census-v">7<span class="census-of">/9</span></span></li><li class=""><span class="census-k">Admits</span><span class="census-v">31</span></li><li class=""><span class="census-k">Discharges</span><span class="census-v">9<span class="census-of">/38</span></span></li></ul>
+      <span class="census-stamp"><span class="live-dot" aria-hidden="true"></span>Updated 09:42</span>
+    </div>
+    <main id="main" class="content" tabindex="-1">
+      <div class="page-head">
+        <div class="page-head-text">
+          <nav aria-label="Breadcrumb"><ol class="crumbs"><li><a href="index.html">St. Aldric General</a></li><li aria-current="page">Overview</li></ol></nav>
+          <h1 class="page-title">Hospital overview</h1>
+          <p class="page-sub">Thursday 24 September &middot; Day shift 07:00&ndash;19:00 &middot; Bed meeting at 10:00, Operations Centre</p>
+        </div>
+        <div class="page-actions"><a class="btn btn-outline" href="beds.html"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M2 4v16"/><path d="M2 8h18a2 2 0 0 1 2 2v10"/><path d="M2 17h20"/><path d="M6 8v9"/></svg> Bed board</a><a class="btn btn-primary" href="patients.html#admit"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg> Admit patient</a></div>
+      </div>
+      <section class="row g-3 mb-3" aria-label="Today at a glance">
+        <div class="col-6 col-xl-3">
+          <article class="kpi">
+            <div class="kpi-head"><p class="kpi-label">Admissions today</p><span class="kpi-icon"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span></div>
+            <p class="kpi-value">31</p>
+            <p class="kpi-foot"><span class="delta delta--up"><svg class="ic ic-xs" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m22 7-8.5 8.5-5-5L2 17"/><path d="M16 7h6v6"/></svg> 4</span> vs. Wednesday at 09:42</p>
+            <svg class="spark" data-values="57,62,51,48,64,68,60" aria-hidden="true"></svg>
+          </article>
+        </div>
+        <div class="col-6 col-xl-3">
+          <article class="kpi">
+            <div class="kpi-head"><p class="kpi-label">Discharges today</p><span class="kpi-icon kpi-icon--teal"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="m16 17 5-5-5-5M21 12H9"/></svg></span></div>
+            <p class="kpi-value">9<span class="kpi-unit">/ 38 planned</span></p>
+            <div class="meter" role="img" aria-label="9 of 38 planned discharges complete"><span style="width:24%"></span></div>
+            <p class="kpi-foot">Discharge lounge: 4 waiting for transport</p>
+          </article>
+        </div>
+        <div class="col-6 col-xl-3">
+          <article class="kpi kpi--alert">
+            <div class="kpi-head"><p class="kpi-label">ED median wait</p><span class="kpi-icon kpi-icon--coral"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span></div>
+            <p class="kpi-value">42<span class="kpi-unit">min</span></p>
+            <div class="meter meter--target" role="img" aria-label="42 minutes against a 30 minute target"><span style="width:70%"></span><i style="left:50%"></i></div>
+            <p class="kpi-foot"><span class="delta delta--bad">+12 min</span> over the 30 min target</p>
+          </article>
+        </div>
+        <div class="col-6 col-xl-3">
+          <article class="kpi">
+            <div class="kpi-head"><p class="kpi-label">Bed occupancy</p><span class="kpi-icon kpi-icon--amber"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M2 4v16"/><path d="M2 8h18a2 2 0 0 1 2 2v10"/><path d="M2 17h20"/><path d="M6 8v9"/></svg></span></div>
+            <p class="kpi-value">84.1<span class="kpi-unit">%</span></p>
+            <div class="meter meter--target" role="img" aria-label="84.1 percent occupied against an 85 percent limit"><span style="width:84.1%"></span><i style="left:85%"></i></div>
+            <p class="kpi-foot">286 of 340 beds &middot; 36 ready now</p>
+          </article>
+        </div>
+      </section>
+      <div class="row g-3 mb-3">
+        <div class="col-xl-8">
+          <section class="panel h-100" aria-labelledby="occ-title">
+            <header class="panel-head">
+              <div>
+                <h2 class="panel-title" id="occ-title">Bed occupancy by ward</h2>
+                <p class="panel-sub">Occupied beds against staffed capacity, highest first. The dashed line marks the 85% safe-occupancy limit.</p>
+              </div>
+              <span class="panel-meta">13 wards &middot; 09:42</span>
+            </header>
+            <div class="panel-body">
+              <figure class="chart chart--bars" id="ward-chart" aria-label="Bed occupancy by ward">
+                <table class="chart-data">
+                  <caption class="visually-hidden">Occupied beds by ward</caption>
+                  <thead><tr><th scope="col">Ward</th><th scope="col">Occupied</th><th scope="col">Beds</th><th scope="col">Occupancy</th></tr></thead>
+                  <tbody><tr><th scope="row">4B General Medicine</th><td class="num">38</td><td class="num">40</td><td class="num">95%</td></tr><tr><th scope="row">2B Elder Care</th><td class="num">32</td><td class="num">34</td><td class="num">94%</td></tr><tr><th scope="row">ICU Intensive Care</th><td class="num">11</td><td class="num">12</td><td class="num">92%</td></tr><tr><th scope="row">4C Respiratory</th><td class="num">25</td><td class="num">28</td><td class="num">89%</td></tr><tr><th scope="row">CCU Coronary Care</th><td class="num">7</td><td class="num">8</td><td class="num">88%</td></tr><tr><th scope="row">AMU Acute Medical Unit</th><td class="num">28</td><td class="num">32</td><td class="num">88%</td></tr><tr><th scope="row">6A Oncology</th><td class="num">19</td><td class="num">22</td><td class="num">86%</td></tr><tr><th scope="row">6B Neurology &amp; Stroke</th><td class="num">17</td><td class="num">20</td><td class="num">85%</td></tr><tr><th scope="row">3A Cardiology</th><td class="num">20</td><td class="num">24</td><td class="num">83%</td></tr><tr><th scope="row">5A General Surgery</th><td class="num">30</td><td class="num">36</td><td class="num">83%</td></tr><tr><th scope="row">2M Maternity</th><td class="num">20</td><td class="num">26</td><td class="num">77%</td></tr><tr><th scope="row">5C Orthopaedics</th><td class="num">21</td><td class="num">28</td><td class="num">75%</td></tr><tr><th scope="row">7A Paediatrics</th><td class="num">18</td><td class="num">30</td><td class="num">60%</td></tr></tbody>
+                </table>
+              </figure>
+              <ul class="legend mt-3">
+                <li><span class="swatch swatch--ok"></span>Below 85%</li>
+                <li><span class="swatch swatch--warn"></span>85&ndash;94%</li>
+                <li><span class="swatch swatch--crit"></span>95% and above</li>
+                <li><span class="swatch swatch--track"></span>Empty capacity</li>
+              </ul>
+            </div>
+          </section>
+        </div>
+        <div class="col-xl-4">
+          <section class="panel h-100" aria-labelledby="alerts-title">
+            <header class="panel-head">
+              <h2 class="panel-title" id="alerts-title">Critical alerts <span class="count-badge count-badge--coral" id="alert-count">5</span></h2>
+              <span class="panel-meta"><span class="live-dot" aria-hidden="true"></span>Live</span>
+            </header>
+            <ul class="alert-list">
+                <li class="alert-item alert-item--crit">
+                  <span class="alert-sev" aria-hidden="true"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9v4M12 17h.01"/></svg></span>
+                  <div class="alert-body">
+                    <p class="alert-title"><span class="visually-hidden">Critical: </span>Sepsis screen positive</p>
+                    <p class="alert-meta">ICU-02 &middot; Tobias Engel &middot; lactate 4.1 mmol/L, MAP 61</p>
+                  </div>
+                  <div class="alert-side">
+                    <time class="alert-time">09:31</time>
+                    <button type="button" class="btn btn-xs btn-outline alert-ack js-only">Acknowledge</button>
+                  </div>
+                </li>
+                <li class="alert-item alert-item--crit">
+                  <span class="alert-sev" aria-hidden="true"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9v4M12 17h.01"/></svg></span>
+                  <div class="alert-body">
+                    <p class="alert-title"><span class="visually-hidden">Critical: </span>Critical potassium 6.3 mmol/L</p>
+                    <p class="alert-meta">4B-22 &middot; Kwame Asante &middot; repeat sample sent</p>
+                  </div>
+                  <div class="alert-side">
+                    <time class="alert-time">09:18</time>
+                    <button type="button" class="btn btn-xs btn-outline alert-ack js-only">Acknowledge</button>
+                  </div>
+                </li>
+                <li class="alert-item alert-item--warn">
+                  <span class="alert-sev" aria-hidden="true"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9v4M12 17h.01"/></svg></span>
+                  <div class="alert-body">
+                    <p class="alert-title"><span class="visually-hidden">Warning: </span>ICU at 92%: no bed ready</p>
+                    <p class="alert-meta">ICU-09 being cleaned, ready about 10:10. Two planned post-op admissions.</p>
+                  </div>
+                  <div class="alert-side">
+                    <time class="alert-time">09:05</time>
+                    <button type="button" class="btn btn-xs btn-outline alert-ack js-only">Acknowledge</button>
+                  </div>
+                </li>
+                <li class="alert-item alert-item--warn">
+                  <span class="alert-sev" aria-hidden="true"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9v4M12 17h.01"/></svg></span>
+                  <div class="alert-body">
+                    <p class="alert-title"><span class="visually-hidden">Warning: </span>ED boarding over 4 hours</p>
+                    <p class="alert-meta">2 patients awaiting medical beds. Site manager informed.</p>
+                  </div>
+                  <div class="alert-side">
+                    <time class="alert-time">08:52</time>
+                    <button type="button" class="btn btn-xs btn-outline alert-ack js-only">Acknowledge</button>
+                  </div>
+                </li>
+                <li class="alert-item alert-item--info">
+                  <span class="alert-sev" aria-hidden="true"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 22a7 7 0 0 0 7-7c0-2-1-3.9-3-5.5s-3.5-4-4-6.5c-.5 2.5-2 4.9-4 6.5C6 11.1 5 13 5 15a7 7 0 0 0 7 7z"/></svg></span>
+                  <div class="alert-body">
+                    <p class="alert-title"><span class="visually-hidden">Notice: </span>O-negative stock below par</p>
+                    <p class="alert-meta">Blood bank holds 6 units (par 10). Delivery due 13:00.</p>
+                  </div>
+                  <div class="alert-side">
+                    <time class="alert-time">08:30</time>
+                    <button type="button" class="btn btn-xs btn-outline alert-ack js-only">Acknowledge</button>
+                  </div>
+                </li>
+            </ul>
+          </section>
+        </div>
+      </div>
+      <div class="row g-3 mb-3">
+        <div class="col-xl-8">
+          <section class="panel h-100" aria-labelledby="flow-title">
+            <header class="panel-head">
+              <div>
+                <h2 class="panel-title" id="flow-title">Patient flow</h2>
+                <p class="panel-sub">Daily admissions and discharges. Shaded columns are weekends, when discharges drop.</p>
+              </div>
+              <div class="seg js-only" role="group" aria-label="Date range">
+                <button type="button" class="seg-btn" data-range="7" aria-pressed="false">7 days</button>
+                <button type="button" class="seg-btn" data-range="14" aria-pressed="true">14 days</button>
+              </div>
+            </header>
+            <div class="panel-body">
+              <div class="chart-legend js-only" role="group" aria-label="Show or hide series">
+                <button type="button" class="legend-btn" data-series="admissions" aria-pressed="true"><span class="swatch swatch--line"></span>Admissions <strong id="flow-sum-admissions">&nbsp;</strong></button>
+                <button type="button" class="legend-btn" data-series="discharges" aria-pressed="true"><span class="swatch swatch--line swatch--teal"></span>Discharges <strong id="flow-sum-discharges">&nbsp;</strong></button>
+                <span class="legend-note" id="flow-net"></span>
+              </div>
+              <figure class="chart chart--line" id="flow-chart" aria-label="Admissions and discharges per day">
+                <table class="chart-data">
+                  <caption class="visually-hidden">Admissions and discharges per day, 10 to 23 September</caption>
+                  <thead><tr><th scope="col">Day</th><th scope="col">Admissions</th><th scope="col">Discharges</th></tr></thead>
+                  <tbody><tr><th scope="row">Thu 10 Sep</th><td class="num">58</td><td class="num">60</td></tr><tr><th scope="row">Fri 11 Sep</th><td class="num">61</td><td class="num">66</td></tr><tr><th scope="row">Sat 12 Sep</th><td class="num">49</td><td class="num">41</td></tr><tr><th scope="row">Sun 13 Sep</th><td class="num">47</td><td class="num">38</td></tr><tr><th scope="row">Mon 14 Sep</th><td class="num">63</td><td class="num">55</td></tr><tr><th scope="row">Tue 15 Sep</th><td class="num">66</td><td class="num">61</td></tr><tr><th scope="row">Wed 16 Sep</th><td class="num">59</td><td class="num">63</td></tr><tr><th scope="row">Thu 17 Sep</th><td class="num">57</td><td class="num">60</td></tr><tr><th scope="row">Fri 18 Sep</th><td class="num">62</td><td class="num">67</td></tr><tr><th scope="row">Sat 19 Sep</th><td class="num">51</td><td class="num">43</td></tr><tr><th scope="row">Sun 20 Sep</th><td class="num">48</td><td class="num">39</td></tr><tr><th scope="row">Mon 21 Sep</th><td class="num">64</td><td class="num">58</td></tr><tr><th scope="row">Tue 22 Sep</th><td class="num">68</td><td class="num">62</td></tr><tr><th scope="row">Wed 23 Sep</th><td class="num">60</td><td class="num">57</td></tr></tbody>
+                </table>
+              </figure>
+            </div>
+          </section>
+        </div>
+        <div class="col-xl-4">
+          <section class="panel h-100" aria-labelledby="ed-title">
+            <header class="panel-head">
+              <h2 class="panel-title" id="ed-title">Emergency department</h2>
+              <span class="panel-meta">09:42</span>
+            </header>
+            <div class="panel-body">
+              <dl class="stat-grid">
+                <div><dt>Waiting</dt><dd>27</dd></div>
+                <div class="is-alert"><dt>Median wait</dt><dd>42<small>min</small></dd></div>
+                <div><dt>Longest wait</dt><dd>3<small>h</small> 12<small>m</small></dd></div>
+                <div><dt>Ambulances inbound</dt><dd>3</dd></div>
+              </dl>
+              <p class="subhead">Waiting by triage level (ESI)</p>
+              <div class="triage-bar" role="img" aria-label="27 waiting: 3 emergent, 11 urgent, 9 less urgent, 4 non-urgent"><span class="tri tri--2" style="flex-grow:3" title="ESI 2: 3 waiting"></span><span class="tri tri--3" style="flex-grow:11" title="ESI 3: 11 waiting"></span><span class="tri tri--4" style="flex-grow:9" title="ESI 4: 9 waiting"></span><span class="tri tri--5" style="flex-grow:4" title="ESI 5: 4 waiting"></span></div>
+              <ul class="triage-list">
+                <li class="triage-list-head" aria-hidden="true"><span></span><span>Level</span><span>Waiting</span><span>Median</span></li>
+                <li><span class="tri-key tri--1">1</span><span class="tri-name">Resuscitation</span><span class="tri-count">0</span><span class="tri-wait">&mdash;</span></li><li><span class="tri-key tri--2">2</span><span class="tri-name">Emergent</span><span class="tri-count">3</span><span class="tri-wait">8 min</span></li><li><span class="tri-key tri--3">3</span><span class="tri-name">Urgent</span><span class="tri-count">11</span><span class="tri-wait">46 min</span></li><li><span class="tri-key tri--4">4</span><span class="tri-name">Less urgent</span><span class="tri-count">9</span><span class="tri-wait">71 min</span></li><li><span class="tri-key tri--5">5</span><span class="tri-name">Non-urgent</span><span class="tri-count">4</span><span class="tri-wait">88 min</span></li>
+              </ul>
+            </div>
+          </section>
+        </div>
+      </div>
+      <div class="row g-3">
+        <div class="col-xl-7">
+          <section class="panel h-100" aria-labelledby="opd-title">
+            <header class="panel-head">
+              <div>
+                <h2 class="panel-title" id="opd-title">Today&rsquo;s OPD appointments</h2>
+                <p class="panel-sub">64 booked across 6 clinics &middot; 14 seen &middot; 6 in consult &middot; 2 no-show</p>
+              </div>
+              <a class="btn btn-sm btn-outline" href="appointments.html">Open board <svg class="ic ic-sm" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+            </header>
+            <div class="table-scroll">
+              <table class="table table-clinical mb-0">
+                <thead><tr><th scope="col">Time</th><th scope="col">Patient</th><th scope="col" class="d-none d-md-table-cell">Clinician</th><th scope="col">Status</th></tr></thead>
+                <tbody>
+                    <tr>
+                      <td class="mono">09:30</td>
+                      <td><div class="pt"><span class="av av--coral av--sm" aria-hidden="true">BH</span><div><span class="pt-name">Bashir Hussain</span><span class="pt-sub mono">SAG-336989</span></div></div></td>
+                      <td class="d-none d-md-table-cell">Dr. K. Ito<span class="cell-sub">Cardiology</span></td>
+                      <td><span class="appt-pill appt-pill--consult">In consult</span></td>
+                    </tr>
+                    <tr>
+                      <td class="mono">09:30</td>
+                      <td><div class="pt"><span class="av av--amber av--sm" aria-hidden="true">AI</span><div><span class="pt-name">Anouk Iyer</span><span class="pt-sub mono">SAG-102031</span></div></div></td>
+                      <td class="d-none d-md-table-cell">Dr. P. Raman<span class="cell-sub">Endocrinology</span></td>
+                      <td><span class="appt-pill appt-pill--consult">In consult</span></td>
+                    </tr>
+                    <tr>
+                      <td class="mono">09:30</td>
+                      <td><div class="pt"><span class="av av--sky av--sm" aria-hidden="true">FA</span><div><span class="pt-name">Fatima Ashworth</span><span class="pt-sub mono">SAG-272339</span></div></div></td>
+                      <td class="d-none d-md-table-cell">Dr. T. Wierzbicki<span class="cell-sub">Orthopaedics</span></td>
+                      <td><span class="appt-pill appt-pill--consult">In consult</span></td>
+                    </tr>
+                    <tr>
+                      <td class="mono">10:00</td>
+                      <td><div class="pt"><span class="av av--navy av--sm" aria-hidden="true">NL</span><div><span class="pt-name">Nnamdi Laurent</span><span class="pt-sub mono">SAG-206458</span></div></div></td>
+                      <td class="d-none d-md-table-cell">Dr. P. Raman<span class="cell-sub">Endocrinology</span></td>
+                      <td><span class="appt-pill appt-pill--arrived">Arrived</span></td>
+                    </tr>
+                    <tr>
+                      <td class="mono">10:00</td>
+                      <td><div class="pt"><span class="av av--slate av--sm" aria-hidden="true">CL</span><div><span class="pt-name">Cecile Lindahl</span><span class="pt-sub mono">SAG-270241</span></div></div></td>
+                      <td class="d-none d-md-table-cell">Dr. T. Wierzbicki<span class="cell-sub">Orthopaedics</span></td>
+                      <td><span class="appt-pill appt-pill--arrived">Arrived</span></td>
+                    </tr>
+                    <tr>
+                      <td class="mono">10:00</td>
+                      <td><div class="pt"><span class="av av--sky av--sm" aria-hidden="true">LM</span><div><span class="pt-name">Lucinda Marchand</span><span class="pt-sub mono">SAG-336663</span></div></div></td>
+                      <td class="d-none d-md-table-cell">Dr. H. Solberg<span class="cell-sub">General Surgery</span></td>
+                      <td><span class="appt-pill appt-pill--arrived">Arrived</span></td>
+                    </tr>
+                    <tr>
+                      <td class="mono">10:00</td>
+                      <td><div class="pt"><span class="av av--amber av--sm" aria-hidden="true">KE</span><div><span class="pt-name">Kofi Eze</span><span class="pt-sub mono">SAG-328458</span></div></div></td>
+                      <td class="d-none d-md-table-cell">Dr. L. Haddad<span class="cell-sub">Paediatrics</span></td>
+                      <td><span class="appt-pill appt-pill--booked">Booked</span></td>
+                    </tr>
+                    <tr>
+                      <td class="mono">10:30</td>
+                      <td><div class="pt"><span class="av av--navy av--sm" aria-hidden="true">CO</span><div><span class="pt-name">Carmen Osman</span><span class="pt-sub mono">SAG-365430</span></div></div></td>
+                      <td class="d-none d-md-table-cell">Dr. K. Ito<span class="cell-sub">Cardiology</span></td>
+                      <td><span class="appt-pill appt-pill--arrived">Arrived</span></td>
+                    </tr>
+                    <tr>
+                      <td class="mono">10:30</td>
+                      <td><div class="pt"><span class="av av--teal av--sm" aria-hidden="true">WH</span><div><span class="pt-name">Wilhelmina Hoffmann</span><span class="pt-sub mono">SAG-362565</span></div></div></td>
+                      <td class="d-none d-md-table-cell">Dr. P. Raman<span class="cell-sub">Endocrinology</span></td>
+                      <td><span class="appt-pill appt-pill--booked">Booked</span></td>
+                    </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+        </div>
+        <div class="col-xl-5">
+          <section class="panel h-100" aria-labelledby="staff-title">
+            <header class="panel-head">
+              <h2 class="panel-title" id="staff-title">Staff on duty</h2>
+              <a class="panel-link" href="staff.html">Roster <svg class="ic ic-sm" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+            </header>
+            <div class="panel-body">
+              <dl class="duty-grid">
+                <div><dt>Doctors</dt><dd>46</dd><span>14 consultants</span></div>
+                <div><dt>Nurses</dt><dd>128</dd><span>104 RN &middot; 24 HCA</span></div>
+                <div><dt>Allied health</dt><dd>31</dd><span>Physio, pharmacy, OT</span></div>
+              </dl>
+              <div class="row g-4">
+                <div class="col-md-6 col-xl-12">
+                  <p class="subhead">Nurse-to-patient ratio</p>
+                  <ul class="ratio-list"><li class=""><span class="ratio-ward">ICU</span><span class="ratio-bar"><span style="width:100%"></span></span><span class="ratio-val">1:1</span></li><li class=""><span class="ratio-ward">CCU</span><span class="ratio-bar"><span style="width:100%"></span></span><span class="ratio-val">1:2</span></li><li class=""><span class="ratio-ward">3A</span><span class="ratio-bar"><span style="width:100%"></span></span><span class="ratio-val">1:5</span></li><li class="is-over"><span class="ratio-ward">4B</span><span class="ratio-bar"><span style="width:86%"></span></span><span class="ratio-val">1:7</span></li><li class=""><span class="ratio-ward">5A</span><span class="ratio-bar"><span style="width:100%"></span></span><span class="ratio-val">1:5</span></li><li class=""><span class="ratio-ward">7A</span><span class="ratio-bar"><span style="width:100%"></span></span><span class="ratio-val">1:4</span></li></ul>
+                  <p class="fine-print">4B is above its 1:6 target.</p>
+                </div>
+                <div class="col-md-6 col-xl-12">
+                  <p class="subhead">Consultants on call</p>
+                  <ul class="oncall-list"><li><span class="av av--amber av--sm" aria-hidden="true">KI</span><div><strong>Dr. K. Ito</strong><span>Cardiology</span></div><span class="bleep"><svg class="ic ic-xs" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg> 4472</span></li><li><span class="av av--slate av--sm" aria-hidden="true">HS</span><div><strong>Dr. H. Solberg</strong><span>General Surgery</span></div><span class="bleep"><svg class="ic ic-xs" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg> 5210</span></li><li><span class="av av--teal av--sm" aria-hidden="true">LH</span><div><strong>Dr. L. Haddad</strong><span>Paediatrics</span></div><span class="bleep"><svg class="ic ic-xs" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg> 6034</span></li><li><span class="av av--amber av--sm" aria-hidden="true">CF</span><div><strong>Dr. C. Fraser</strong><span>Intensive Care</span></div><span class="bleep"><svg class="ic ic-xs" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg> 2001</span></li></ul>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </main>
+    <footer class="app-footer">
+      <p>&copy; St. Aldric General Hospital &middot; Rounds HMS 2.4 &middot; All names and records are fictional demo data.</p>
+      <p>Template by <a href="https://uicookies.com/">uiCookies</a></p>
+    </footer>
+  </div>
+  </div>
+
+  <div class="toast-live" id="live" role="status" aria-live="polite"></div>
+  <script src="js/vendor/bootstrap.bundle.min.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
